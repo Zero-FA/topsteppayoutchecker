@@ -804,28 +804,27 @@ function renderRules() {
     }
   }
 
-  /* ---------- Event Listeners ---------- */
+/* ---------- Event Listeners ---------- */
 
-  document.querySelectorAll("input, select").forEach(el => {
-    el.addEventListener("input", render);
-  });
+document.querySelectorAll("input, select").forEach(el => {
+  el.addEventListener("input", render);
+});
 
-  // When switching between Express / Live, redraw rules + UI
-  $("#firm").addEventListener("change", () => {
-    const isLive = $("#firm").value === "live";
-    $("#liveOnlyWrap").style.display = isLive ? "block" : "none";
+// When switching between Express / Live, redraw rules + UI
+$("#firm").addEventListener("change", () => {
+  const isLive = $("#firm").value === "live";
+  $("#liveOnlyWrap").style.display = isLive ? "block" : "none";
 
-    // Update payout policy link
-    $("#policyLink").href =
-      $("#firm").value === "express"
-        ? "https://help.topstep.com/en/articles/8284233-topstep-payout-policy"
-        : "https://help.topstep.com/en/articles/8284215-express-funded-account-parameters";
-    // Hide Live-only fields on first load
-$("#liveOnlyWrap").style.display = $("#firm").value === "live" ? "block" : "none";
+  // Update payout policy link
+  $("#policyLink").href =
+    $("#firm").value === "express"
+      ? "https://help.topstep.com/en/articles/8284233-topstep-payout-policy"
+      : "https://help.topstep.com/en/articles/8284215-express-funded-account-parameters";
 
-    renderRules();
-    render();
-  });
+  renderRules();
+  render();
+});
+
 /* ---------- Accordion toggle ---------- */
 $("#checklistHeader").addEventListener("click", () => {
   const body = $("#checklistBody");
@@ -835,13 +834,12 @@ $("#checklistHeader").addEventListener("click", () => {
   body.style.display = open ? "none" : "block";
   icon.textContent = open ? "▶" : "▼";
 });
-  /* Initialize */
-  renderRules();
-  render();
 
-}); // DOMContentLoaded
-</script>
+/* ---------- Initialize ---------- */
 
-<script src="https://cdn.vercel-insights.com/v1/script.js" defer></script>
-</body>
-</html>
+// Hide Live-only fields on first load
+$("#liveOnlyWrap").style.display =
+  $("#firm").value === "live" ? "block" : "none";
+
+renderRules();
+render();
