@@ -311,14 +311,6 @@
   </div>
 </div>
 
-<div>
-  <div class="label">Total Net PnL ($)</div>
-  <input id="currentPnl" class="input" inputmode="decimal" placeholder="e.g., 4400" />
-  <div class="help">
-    Profit above the starting balance (this is what determines payout eligibility).
-  </div>
-</div>
-
           <div>
             <div class="label">Requested Payout ($)</div>
             <input id="requestedPayout" class="input" inputmode="decimal" placeholder="e.g., 500" />
@@ -444,7 +436,7 @@
             <div class="tile-label">Max allowed payout this request</div>
             <div class="tile-main" id="maxCap">—</div>
             <div class="help" id="maxCapHelp">
-              Express: up to $5,000 or 50% of balance. Live: 50% until 30 winning days, then up to 100%.
+    Express: up to $5,000 or 50% of profit. Live: 50% of profit until 30 winning days, then up to 100%.
             </div>
           </div>
           <div class="tile">
@@ -597,6 +589,19 @@ function renderRules() {
   function evaluate(inputs) {
     const cfg = ACCOUNT_CONFIG[inputs.account];
     const firm = inputs.firm;
+// starting balances for calculating profit from balance
+const STARTING_BALANCES = {
+  "50k": 50000,
+  "100k": 100000,
+  "150k": 150000
+};
+// compute actual profit: currentBalance - startingBalance
+const profitFromBalance = Math.max(
+  0,
+  inputs.currentBalance - STARTING_BALANCES[inputs.account]
+);
+// compute profit from balance - starting balance
+const profitFromBalance = Math.max(0, inputs.currentBalance - STARTING_BALANCES[inputs.account]);
 
     const minPayout = 125;
 
@@ -613,20 +618,17 @@ function renderRules() {
     /* --- Compute max allowed payout based on firm --- */
     let maxAllowed = 0;
 
-    if (firm === "express") {
-const profit = inputs.currentPnl;
-const fiftyPercent = profit * 0.5;
-maxAllowed = Math.min(5000, fiftyPercent);
-    } else {
-      // LIVE
-const profit = inputs.currentPnl;
-
-if (live30Days) {
-  maxAllowed = profit; // 100% profit allowed
+if (firm === "express") {
+  const fiftyPercent = profitFromBalance * 0.5;
+  maxAllowed = Math.min(5000, fiftyPercent);
 } else {
-  maxAllowed = profit * 0.5; // applies 50% until 30 wins
+  // LIVE
+  if (live30Days) {
+    maxAllowed = profitFromBalance;         // full profit available
+  } else {
+    maxAllowed = profitFromBalance * 0.5;   // 50% rule pre-30 wins
+  }
 }
-    }
 
     // ensure non-negative
     maxAllowed = Math.max(0, Math.floor(maxAllowed));
@@ -735,7 +737,6 @@ if (live30Days) {
       account: $("#account").value,
       accountStatus: $("#accountStatus").value,
 currentBalance: num($("#currentBalance").value),
-currentPnl: num($("#currentPnl").value),  // NEW FIXED FIELD
 requestedPayout: num($("#requestedPayout").value),
 winningDays: Math.max(0, num($("#winningDays").value)),
 minWinPnl: num($("#minWinPnl").value),
