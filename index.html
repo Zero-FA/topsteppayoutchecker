@@ -820,6 +820,8 @@ function renderRules() {
       $("#firm").value === "express"
         ? "https://help.topstep.com/en/articles/8284233-topstep-payout-policy"
         : "https://help.topstep.com/en/articles/8284215-express-funded-account-parameters";
+    // Hide Live-only fields on first load
+$("#liveOnlyWrap").style.display = $("#firm").value === "live" ? "block" : "none";
 
     renderRules();
     render();
