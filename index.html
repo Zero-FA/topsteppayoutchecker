@@ -845,10 +845,13 @@ $("#checklistHeader").addEventListener("click", () => {
   body.style.display = open ? "none" : "block";
   icon.textContent = open ? "▶" : "▼";
 });
-  /* Initialize */
-  renderRules();
-  render();
+/* Initialize */
+renderRules();
 
+// Hide live-only field on initial load
+$("#liveOnlyWrap").style.display = $("#firm").value === "live" ? "block" : "none";
+
+render();
 }); // DOMContentLoaded
 </script>
 
