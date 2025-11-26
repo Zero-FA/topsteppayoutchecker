@@ -296,7 +296,6 @@ body {
 /* =======================
    END OF TOPSTEP THEME
    ======================= */
-   #checklistBody { display:none; }
 
 </style>
 </head>
@@ -432,23 +431,24 @@ body {
         <ul id="rulesList" class="list rules-grid"></ul>
       </div>
 
-      <!-- Eligibility Checklist -->
-      <div class="card">
-        <div id="checklistHeader" class="accordion-header">
-          <div class="accordion-title">Eligibility Checklist</div>
-          <div style="display:flex;align-items:center;gap:6px;">
-            <span class="help" style="margin-top:0;font-size:10px;">Click to expand</span>
-            <span id="checklistIcon" class="accordion-icon">▶</span>
-          </div>
-        </div>
-        <div class="help" style="margin-top:4px;margin-bottom:2px;">
-          Updates automatically based on your numbers and rule confirmations.
-        </div>
-        <div id="checklistBody" class="accordion-body">
-          <ul id="checklist" class="list" style="margin-top:4px;"></ul>
-        </div>
-      </div>
+<!-- Eligibility Checklist -->
+<div class="card">
+  <div id="checklistHeader" class="accordion-header">
+    <div class="accordion-title">Eligibility Checklist</div>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <span class="help" style="margin-top:0;font-size:10px;">Click to expand</span>
+      <span id="checklistIcon" class="accordion-icon">▶</span>
     </div>
+  </div>
+  <div class="help" style="margin-top:4px;margin-bottom:2px;">
+    Updates automatically based on your numbers and rule confirmations.
+  </div>
+
+  <!-- FIX APPLIED HERE ↓↓↓ -->
+  <div id="checklistBody" class="accordion-body" style="display:none;">
+    <ul id="checklist" class="list" style="margin-top:4px;"></ul>
+  </div>
+</div>
 
     <!-- RIGHT COLUMN -->
     <div class="grid" style="gap:12px;">
