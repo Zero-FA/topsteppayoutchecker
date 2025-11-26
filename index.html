@@ -100,13 +100,14 @@ body {
 }
 
 .input, .select {
-  width:100%;
-  background:#0f0f0f;
-  border:1px solid #333;
-  color:#fff;
-  border-radius:10px;
-  padding:8px 10px;
-  font:13px system-ui,Segoe UI,Roboto,Helvetica,Arial;
+  width: 100%;
+  background: #0f0f0f;
+  border: 1px solid #444;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 12px;        /* MORE vertical spacing */
+  font: 14px system-ui, Segoe UI, Roboto, Helvetica, Arial;
+  box-sizing: border-box;    /* prevents overflow */
 }
 
 .input:focus, .select:focus {
@@ -303,6 +304,19 @@ body {
 @media (max-width:920px){
   .cols2 { grid-template-columns:1fr; }
 }
+.main-cols {
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width:1200px) {
+  .main-cols {
+    grid-template-columns: 1fr; /* collapse on smaller screens */
+  }
+}
+   .card .cols2 {
+  gap: 14px 18px !important;
+}
 
 /* =======================
    END OF TOPSTEP THEME
@@ -335,8 +349,7 @@ body {
   </div>
 
   <!-- Main grid -->
-  <div class="grid cols2" style="gap:16px;align-items:start;margin-top:10px;">
-
+<div class="grid cols2 main-cols">
     <!-- LEFT COLUMN -->
     <div class="grid" style="gap:12px;">
 
