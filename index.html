@@ -560,22 +560,6 @@ document.addEventListener('DOMContentLoaded', () => {
       rulesList.appendChild(li);
     });
   }
-function renderRules() {
-  const firm = $("#firm").value;
-  rulesList.innerHTML = "";
-  FIRM_RULES[firm].forEach(rule => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <div class="rule-main">
-        <input type="checkbox" id="rule_${rule.key}" data-rule="${rule.key}" />
-        <label for="rule_${rule.key}">${rule.label}</label>
-      </div>
-      <a href="${RULE_LINKS[rule.key]}" target="_blank" class="rule-link">
-        Learn more →
-      </a>
-    `;
-    rulesList.appendChild(li);
-  });
 
   // 🔥 FIXED: Auto-update when checking ANY rule box
   rulesList.querySelectorAll("input[type='checkbox']").forEach(box => {
