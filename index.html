@@ -303,20 +303,25 @@
             </div>
           </div>
 
-          <div>
-            <div class="label">Current Balance ($)</div>
-            <input id="currentBalance" class="input" inputmode="decimal" placeholder="e.g., 5400" />
-            <div class="label">Current PnL ($)</div>
-            <input id="currentBalance" class="input" inputmode="decimal" placeholder="e.g., 5431.52" />
-            <div class="help">
-              Use the actual balance shown in your funded account dashboard.
-            </div>
-          </div>
+<div>
+  <div class="label">Current Account Balance ($)</div>
+  <input id="currentBalance" class="input" inputmode="decimal" placeholder="e.g., 54400" />
+  <div class="help">
+    Full balance shown in your funded account dashboard.
+  </div>
+</div>
+
+<div>
+  <div class="label">Total Net PnL ($)</div>
+  <input id="currentPnl" class="input" inputmode="decimal" placeholder="e.g., 4400" />
+  <div class="help">
+    Profit above the starting balance (this is what determines payout eligibility).
+  </div>
+</div>
 
           <div>
             <div class="label">Requested Payout ($)</div>
             <input id="requestedPayout" class="input" inputmode="decimal" placeholder="e.g., 500" />
-            <input id="requestedPayout" class="input" inputmode="decimal" placeholder="e.g., 125" />
             <div id="minPayoutHelp" class="help">
               Min payout is $125. Caps & 50% rules apply by account type.
             </div>
@@ -338,7 +343,6 @@
 
           <div>
             <div class="label">Smallest Net PnL on Winning Days ($)</div>
-            <input id="minWinPnl" class="input" inputmode="decimal" placeholder="e.g., 180" />
             <input id="minWinPnl" class="input" inputmode="decimal" placeholder="e.g., 150.77" />
             <div class="help">
               Used to check that each winning day actually qualifies.
@@ -610,15 +614,18 @@ function renderRules() {
     let maxAllowed = 0;
 
     if (firm === "express") {
-      const fiftyPercent = inputs.currentBalance * 0.5;
-      maxAllowed = Math.min(5000, fiftyPercent);
+const profit = inputs.currentPnl;
+const fiftyPercent = profit * 0.5;
+maxAllowed = Math.min(5000, fiftyPercent);
     } else {
       // LIVE
-      if (live30Days) {
-        maxAllowed = inputs.currentBalance; // 100% allowed
-      } else {
-        maxAllowed = inputs.currentBalance * 0.5; // 50% rule
-      }
+const profit = inputs.currentPnl;
+
+if (live30Days) {
+  maxAllowed = profit; // 100% profit allowed
+} else {
+  maxAllowed = profit * 0.5; // applies 50% until 30 wins
+}
     }
 
     // ensure non-negative
@@ -727,11 +734,12 @@ function renderRules() {
       firm: $("#firm").value,
       account: $("#account").value,
       accountStatus: $("#accountStatus").value,
-      currentBalance: num($("#currentBalance").value),
-      requestedPayout: num($("#requestedPayout").value),
-      winningDays: Math.max(0, num($("#winningDays").value)),
-      minWinPnl: num($("#minWinPnl").value),
-      totalLiveWins: Math.max(0, num($("#totalLiveWins").value))
+currentBalance: num($("#currentBalance").value),
+currentPnl: num($("#currentPnl").value),  // NEW FIXED FIELD
+requestedPayout: num($("#requestedPayout").value),
+winningDays: Math.max(0, num($("#winningDays").value)),
+minWinPnl: num($("#minWinPnl").value),
+totalLiveWins: Math.max(0, num($("#totalLiveWins").value))
     };
   }
 
