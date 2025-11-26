@@ -303,8 +303,8 @@
           </div>
 
           <div>
-            <div class="label">Current Balance ($)</div>
-            <input id="currentBalance" class="input" inputmode="decimal" placeholder="e.g., 5400" />
+            <div class="label">Current PnL ($)</div>
+            <input id="currentBalance" class="input" inputmode="decimal" placeholder="e.g., 5431.52" />
             <div class="help">
               Use the actual balance shown in your funded account dashboard.
             </div>
@@ -312,7 +312,7 @@
 
           <div>
             <div class="label">Requested Payout ($)</div>
-            <input id="requestedPayout" class="input" inputmode="decimal" placeholder="e.g., 500" />
+            <input id="requestedPayout" class="input" inputmode="decimal" placeholder="e.g., 125" />
             <div id="minPayoutHelp" class="help">
               Min payout is $125. Caps & 50% rules apply by account type.
             </div>
@@ -334,7 +334,7 @@
 
           <div>
             <div class="label">Smallest Net PnL on Winning Days ($)</div>
-            <input id="minWinPnl" class="input" inputmode="decimal" placeholder="e.g., 180" />
+            <input id="minWinPnl" class="input" inputmode="decimal" placeholder="e.g., 150.77" />
             <div class="help">
               Used to check that each winning day actually qualifies.
             </div>
@@ -560,6 +560,28 @@ document.addEventListener('DOMContentLoaded', () => {
       rulesList.appendChild(li);
     });
   }
+function renderRules() {
+  const firm = $("#firm").value;
+  rulesList.innerHTML = "";
+  FIRM_RULES[firm].forEach(rule => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <div class="rule-main">
+        <input type="checkbox" id="rule_${rule.key}" data-rule="${rule.key}" />
+        <label for="rule_${rule.key}">${rule.label}</label>
+      </div>
+      <a href="${RULE_LINKS[rule.key]}" target="_blank" class="rule-link">
+        Learn more →
+      </a>
+    `;
+    rulesList.appendChild(li);
+  });
+
+  // 🔥 FIXED: Auto-update when checking ANY rule box
+  rulesList.querySelectorAll("input[type='checkbox']").forEach(box => {
+    box.addEventListener("input", render);
+  });
+}
 
   /* ---------- Evaluation Logic for Express & Live ---------- */
 
@@ -802,7 +824,15 @@ document.addEventListener('DOMContentLoaded', () => {
     renderRules();
     render();
   });
+/* ---------- Accordion toggle ---------- */
+$("#checklistHeader").addEventListener("click", () => {
+  const body = $("#checklistBody");
+  const icon = $("#checklistIcon");
+  const open = body.style.display === "block";
 
+  body.style.display = open ? "none" : "block";
+  icon.textContent = open ? "▶" : "▼";
+});
   /* Initialize */
   renderRules();
   render();
