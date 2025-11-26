@@ -7,129 +7,202 @@
 <link rel="icon" href="data:,">
 <style>
   :root{
-    --bg:#020617;
-    --bg2:#020617;
-    --card:#020617;
-    --card-soft:#050816;
-    --ink:#e5e7eb;
-    --muted:#9ca3af;
-    --line:#111827;
-    --good:#22c55e;
-    --bad:#f97373;
-    --pill:#10b98133;
-    --accent:#60a5fa;
+    /* Brand-ish colors (Topstep-y) */
+    --bg:#f5f7fb;
+    --bg2:#ffffff;
+    --card:#ffffff;
+    --card-soft:#f9fafb;
+    --ink:#111827;
+    --muted:#6b7280;
+    --line:#e5e7eb;
+    --good:#10b981;
+    --bad:#ef4444;
+    --pill:#ecfdf3;
+    --accent:#0ea5e9;
   }
+
   *{box-sizing:border-box}
+
   body{
     margin:0;
     background:
-      radial-gradient(circle at top left, #1d283a 0, #020617 45%),
-      radial-gradient(circle at bottom right, #0b1120 0, #020617 55%);
+      radial-gradient(circle at top left, #e0f2fe 0, #f5f7fb 55%),
+      radial-gradient(circle at bottom right, #fef9c3 0, #f5f7fb 60%);
     color:var(--ink);
-    font:18px/1.5 system-ui,Segoe UI,Roboto,Helvetica,Arial;
+    font:16px/1.5 system-ui,Segoe UI,Roboto,Helvetica,Arial;
   }
-  .wrap{max-width:1120px;margin:32px auto;padding:0 16px}
-  .h1{font-weight:800;font-size:24px;margin-bottom:4px;letter-spacing:.02em}
-  .sub{color:var(--muted);margin-bottom:4px;font-size:13px}
-  .disclaimer{color:#6b7280;font-size:11px;margin-top:2px;margin-bottom:10px}
+
+  .wrap{
+    max-width:1120px;
+    margin:32px auto 40px;
+    padding:0 16px;
+  }
+
+  .h1{
+    font-weight:800;
+    font-size:26px;
+    margin-bottom:4px;
+    letter-spacing:.01em;
+    color:#020617;
+  }
+
+  .sub{
+    color:var(--muted);
+    margin-bottom:4px;
+    font-size:13px;
+  }
+
+  .disclaimer{
+    color:#9ca3af;
+    font-size:11px;
+    margin-top:2px;
+    margin-bottom:10px;
+  }
+
   .card{
-    background:rgba(15,23,42,.96);
-    border:1px solid rgba(148,163,184,.12);
+    background:var(--card);
+    border:1px solid var(--line);
     border-radius:18px;
     padding:16px 16px 14px;
-    box-shadow:0 18px 40px rgba(0,0,0,.45);
+    box-shadow:0 14px 30px rgba(15,23,42,.06);
   }
+
   .card-soft{
-    background:rgba(15,23,42,.9);
+    background:var(--card-soft);
     border-radius:16px;
-    border:1px solid rgba(30,64,175,.5);
+    border:1px solid #e5e7eb;
     padding:12px 14px;
   }
+
   .grid{display:grid;gap:12px}
   .cols2{grid-template-columns:1fr 1fr}
-  .label{font-size:11px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}
+
+  .label{
+    font-size:11px;
+    color:var(--muted);
+    margin-bottom:4px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+  }
+
   .input,.select{
     width:100%;
-    border:1px solid #1f2937;
-    background:rgba(15,23,42,.95);
+    border:1px solid #d1d5db;
+    background:#ffffff;
     color:var(--ink);
     border-radius:10px;
     padding:8px 10px;
     font:13px system-ui,Segoe UI,Roboto,Helvetica,Arial;
+    transition:border-color .12s ease, box-shadow .12s ease, background-color .12s ease;
   }
+
   .input:focus,.select:focus{
     outline:none;
-    border-color:#3b82f6;
-    box-shadow:0 0 0 1px rgba(59,130,246,.5);
+    border-color:var(--accent);
+    box-shadow:0 0 0 1px rgba(14,165,233,.35);
+    background:#f9fafb;
   }
-  .help{font-size:14px;color:var(--muted);margin-top:3px}
+
+  .help{
+    font-size:12px;
+    color:var(--muted);
+    margin-top:3px;
+  }
+
   .row{display:flex;gap:8px;align-items:center}
   .row-between{display:flex;justify-content:space-between;align-items:center;gap:8px}
+
   .pill{
     display:inline-flex;
     align-items:center;
     gap:6px;
-    padding:3px 8px;
+    padding:4px 10px;
     border-radius:999px;
     font-size:11px;
-    background:rgba(22,163,74,.12);
-    border:1px solid rgba(34,197,94,.5);
+    background:var(--pill);
+    border:1px solid rgba(16,185,129,.4);
+    color:#166534;
   }
+
   .pill-bad{
-    background:rgba(248,113,113,.12);
-    border-color:rgba(248,113,113,.7);
-    color:#fecaca;
+    background:#fef2f2;
+    border-color:#fecaca;
+    color:#b91c1c;
   }
+
   .pill span.dot{
-    width:6px;height:6px;border-radius:999px;
+    width:6px;
+    height:6px;
+    border-radius:999px;
     background:currentColor;
   }
+
   #yesno span:last-child {
     font-size:18px;
     font-weight:700;
   }
+
   .tile{
-    background:#020617;
-    border:1px solid #111827;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
     border-radius:12px;
     padding:8px 10px;
   }
-  .tile-label{font-size:11px;color:var(--muted);margin-bottom:3px}
-  .tile-main{font-size:13px;font-weight:600}
+
+  .tile-label{
+    font-size:11px;
+    color:var(--muted);
+    margin-bottom:3px;
+  }
+
+  .tile-main{
+    font-size:14px;
+    font-weight:600;
+    color:#111827;
+  }
+
   .range{
-    background:rgba(6,78,59,.3);
-    border:1px solid #047857;
-    color:#a7f3d0;
+    background:#ecfdf5;
+    border:1px solid #a7f3d0;
+    color:#047857;
     border-radius:12px;
     padding:9px 10px;
   }
+
   .list{list-style:none;padding:0;margin:0}
   .list li{
     display:flex;
     gap:8px;
     align-items:flex-start;
     padding:5px 0;
-    border-bottom:1px dashed #111827;
+    border-bottom:1px dashed #e5e7eb;
   }
   .list li:last-child{border-bottom:0}
-  .mono{font:11px ui-monospace,Consolas,Menlo,monospace}
+
+  .mono{
+    font:11px ui-monospace,Consolas,Menlo,monospace;
+  }
+
   hr{
     border:none;
-    border-top:1px dashed #111827;
+    border-top:1px dashed #e5e7eb;
     margin:10px 0;
   }
+
   svg{flex:0 0 auto}
+
   .tag{
     display:inline-flex;
     align-items:center;
     gap:4px;
-    padding:2px 7px;
+    padding:3px 9px;
     border-radius:999px;
-    border:1px solid #1d4ed8;
-    background:rgba(30,64,175,.18);
-    font-size:14px;
-    color:#bfdbfe;
+    border:1px solid rgba(14,165,233,.4);
+    background:#e0f2fe;
+    font-size:11px;
+    color:#075985;
   }
+
   .top-bar{
     display:flex;
     justify-content:space-between;
@@ -137,38 +210,48 @@
     gap:8px;
     flex-wrap:wrap;
   }
+
   .aff-btn{
     display:inline-block;
-    padding:7px 13px;
-    background:radial-gradient(circle at top left,#059669,#064e3b);
-    border:1px solid rgba(52,211,153,.75);
+    padding:8px 14px;
+    background:linear-gradient(135deg,#0ea5e9,#22c55e);
+    border:1px solid rgba(59,130,246,.35);
     border-radius:999px;
-    color:#d1fae5;
+    color:white;
     font-weight:600;
     font-size:12px;
     text-decoration:none;
-    box-shadow:0 10px 25px rgba(15,23,42,.8);
+    box-shadow:0 10px 25px rgba(15,23,42,.18);
+    transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
   }
+
   .aff-btn:hover{
-    filter:brightness(1.08);
+    filter:brightness(1.04);
     transform:translateY(-1px);
+    box-shadow:0 14px 30px rgba(15,23,42,.22);
   }
+
   .top-bar-boost{
-    background:rgba(22,163,74,.22);
-    border:1px solid rgba(52,211,153,.4);
+    background:#ecfdf5;
+    border:1px solid #bbf7d0;
     padding:12px 16px;
     border-radius:14px;
     margin-bottom:14px;
     text-align:center;
-    font-size:18px;
+    font-size:15px;
     font-weight:600;
-    color:#bbf7d0;
+    color:#166534;
   }
+
+  .top-bar-boost strong{
+    color:#0f766e;
+  }
+
   .deal-size{
-    text-shadow:0 0 12px rgba(74,222,128,.65);
+    text-shadow:0 0 12px rgba(56,189,248,.55);
     font-size:26px;
     font-weight:900;
-    background:linear-gradient(90deg,#6ee7b7,#a7f3d0);
+    background:linear-gradient(90deg,#0ea5e9,#22c55e);
     -webkit-background-clip:text;
     color:transparent;
   }
@@ -187,7 +270,7 @@
   .rule-main label{font-size:12px;font-weight:500;cursor:pointer}
   .rule-link{
     font-size:11px;
-    color:#60a5fa;
+    color:var(--accent);
     text-decoration:none;
   }
   .rule-link:hover{text-decoration:underline}
@@ -220,11 +303,11 @@
     align-items:center;
     gap:6px;
     font-size:11px;
-    color:#fecaca;
-    background:rgba(127,29,29,.55);
+    color:#7f1d1d;
+    background:#fef2f2;
     border-radius:999px;
     padding:3px 8px;
-    border:1px solid #b91c1c;
+    border:1px solid #fecaca;
     margin-bottom:6px;
   }
 
@@ -236,7 +319,7 @@
 <body>
 <div class="wrap">
 
-  <!-- Promo / affiliate banner (edit link/text as you like) -->
+  <!-- Promo / affiliate banner -->
   <div class="top-bar-boost">
     💰 Trading with <strong>Topstep</strong>? Use your funded days wisely and check payout eligibility before you click withdraw.
   </div>
@@ -302,13 +385,13 @@
             </div>
           </div>
 
-<div>
-  <div class="label">Current Account Balance ($)</div>
-  <input id="currentBalance" class="input" inputmode="decimal" placeholder="e.g., 54400" />
-  <div class="help">
-    Full balance shown in your funded account dashboard.
-  </div>
-</div>
+          <div>
+            <div class="label">Current Account Balance ($)</div>
+            <input id="currentBalance" class="input" inputmode="decimal" placeholder="e.g., 54400" />
+            <div class="help">
+              Full balance shown in your funded account dashboard.
+            </div>
+          </div>
 
           <div>
             <div class="label">Requested Payout ($)</div>
@@ -355,7 +438,7 @@
         <div class="row-between" style="margin-bottom:4px;">
           <div style="font-weight:600;font-size:16px;">Trading Rule Compliance (Required)</div>
           <div class="tag">
-            <span style="width:7px;height:7px;border-radius:999px;background:#22c55e;"></span>
+            <span style="width:7px;height:7px;border-radius:999px;background:var(--good);"></span>
             Must be TRUE for payout
           </div>
         </div>
@@ -387,7 +470,7 @@
     <div class="grid" style="gap:12px;">
 
       <!-- Summary -->
-      <div id="summaryCard" class="card" style="border-color:#1d4ed8;">
+      <div id="summaryCard" class="card" style="border-color:#e5e7eb;">
         <div class="row-between">
           <div class="row" style="gap:6px">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
@@ -406,18 +489,18 @@
             <a id="policyLink"
                href="https://help.topstep.com/en/articles/8284233-topstep-payout-policy"
                target="_blank"
-               style="font-size:11px;color:#93c5fd;text-decoration:none;">
+               style="font-size:11px;color:#0ea5e9;text-decoration:none;">
                View Payout Policy →
             </a>
           </div>
         </div>
 
-        <div style="display:flex;align-items:center;gap:12px;margin:6px 0 8px 0;">
+        <div style="display:flex;align-items:center;gap:12px;margin:8px 0 10px 0;">
           <div id="yesno" class="pill">
             <span class="dot"></span>
             <span>YES</span>
           </div>
-          <div style="font-size:14px;color:var(--muted);">
+          <div style="font-size:13px;color:var(--muted);">
             You still must follow Topstep’s official dashboard & Help Center. This is an estimator only.
           </div>
         </div>
@@ -435,7 +518,7 @@
             <div class="tile-label">Max allowed payout this request</div>
             <div class="tile-main" id="maxCap">—</div>
             <div class="help" id="maxCapHelp">
-    Express: up to $5,000 or 50% of profit. Live: 50% of profit until 30 winning days, then up to 100%.
+              Express: up to $5,000 or 50% of profit. Live: 50% of profit until 30 winning days, then up to 100%.
             </div>
           </div>
           <div class="tile">
@@ -540,7 +623,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const v = Number(String(s||"").replace(/[^0-9.-]/g,""));
     return Number.isFinite(v) ? v : 0;
   };
-    /* ---------- Build Trading Rule Checkboxes ---------- */
+
+  /* ---------- Build Trading Rule Checkboxes ---------- */
   const rulesList = $("#rulesList");
 
   function renderRules() {
@@ -559,73 +643,58 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
       rulesList.appendChild(li);
     });
-  }
-function renderRules() {
-  const firm = $("#firm").value;
-  rulesList.innerHTML = "";
-  FIRM_RULES[firm].forEach(rule => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <div class="rule-main">
-        <input type="checkbox" id="rule_${rule.key}" data-rule="${rule.key}" />
-        <label for="rule_${rule.key}">${rule.label}</label>
-      </div>
-      <a href="${RULE_LINKS[rule.key]}" target="_blank" class="rule-link">
-        Learn more →
-      </a>
-    `;
-    rulesList.appendChild(li);
-  });
 
-  // 🔥 FIXED: Auto-update when checking ANY rule box
-  rulesList.querySelectorAll("input[type='checkbox']").forEach(box => {
-    box.addEventListener("input", render);
-  });
-}
+    // re-wire checkbox listeners
+    rulesList.querySelectorAll("input[type='checkbox']").forEach(box => {
+      box.addEventListener("input", render);
+    });
+  }
 
   /* ---------- Evaluation Logic for Express & Live ---------- */
 
   function evaluate(inputs) {
     const cfg = ACCOUNT_CONFIG[inputs.account];
     const firm = inputs.firm;
-// starting balances for calculating profit from balance
-const STARTING_BALANCES = {
-  "50k": 50000,
-  "100k": 100000,
-  "150k": 150000
-};
-// compute actual profit: currentBalance - startingBalance
-const profitFromBalance = Math.max(
-  0,
-  inputs.currentBalance - STARTING_BALANCES[inputs.account]
-);
+
+    // starting balances for calculating profit from balance
+    const STARTING_BALANCES = {
+      "50k": 50000,
+      "100k": 100000,
+      "150k": 150000
+    };
+
+    // compute actual profit: currentBalance - startingBalance
+    const profitFromBalance = Math.max(
+      0,
+      inputs.currentBalance - STARTING_BALANCES[inputs.account]
+    );
 
     const minPayout = 125;
 
     /* --- Winning-day validity --- */
     const fiveWinningDays = inputs.winningDays >= 5;
-    const minWinThresholdOK = inputs.minWinPnl >= 125; // Topstep says "around $150–$200", using $125 floor
+    const minWinThresholdOK = inputs.minWinPnl >= 125; // using $125 floor
 
     /* --- Max Loss Limit threshold display --- */
     const mllValue = cfg.maxLossLimit;
 
-    /* --- LIVE FUNDED special rule: 30 winning days unlocks 100% withdrawals + daily payouts --- */
+    /* --- LIVE FUNDED special rule --- */
     const live30Days = inputs.totalLiveWins >= 30;
 
     /* --- Compute max allowed payout based on firm --- */
     let maxAllowed = 0;
 
-if (firm === "express") {
-  const fiftyPercent = profitFromBalance * 0.5;
-  maxAllowed = Math.min(5000, fiftyPercent);
-} else {
-  // LIVE
-  if (live30Days) {
-    maxAllowed = profitFromBalance;         // full profit available
-  } else {
-    maxAllowed = profitFromBalance * 0.5;   // 50% rule pre-30 wins
-  }
-}
+    if (firm === "express") {
+      const fiftyPercent = profitFromBalance * 0.5;
+      maxAllowed = Math.min(5000, fiftyPercent);
+    } else {
+      // LIVE
+      if (live30Days) {
+        maxAllowed = profitFromBalance;         // full profit available
+      } else {
+        maxAllowed = profitFromBalance * 0.5;   // 50% rule pre-30 wins
+      }
+    }
 
     // ensure non-negative
     maxAllowed = Math.max(0, Math.floor(maxAllowed));
@@ -733,11 +802,11 @@ if (firm === "express") {
       firm: $("#firm").value,
       account: $("#account").value,
       accountStatus: $("#accountStatus").value,
-currentBalance: num($("#currentBalance").value),
-requestedPayout: num($("#requestedPayout").value),
-winningDays: Math.max(0, num($("#winningDays").value)),
-minWinPnl: num($("#minWinPnl").value),
-totalLiveWins: Math.max(0, num($("#totalLiveWins").value))
+      currentBalance: num($("#currentBalance").value),
+      requestedPayout: num($("#requestedPayout").value),
+      winningDays: Math.max(0, num($("#winningDays").value)),
+      minWinPnl: num($("#minWinPnl").value),
+      totalLiveWins: Math.max(0, num($("#totalLiveWins").value))
     };
   }
 
@@ -754,7 +823,7 @@ totalLiveWins: Math.max(0, num($("#totalLiveWins").value))
       : "NO";
 
     /* Card border */
-    $("#summaryCard").style.borderColor = res.eligible ? "#22c55e" : "#fb7185";
+    $("#summaryCard").style.borderColor = res.eligible ? "#10b981" : "#ef4444";
 
     /* Summary numbers */
     $("#mllValue").textContent = `$${fmt(res.computed.mllValue)}`;
@@ -783,7 +852,7 @@ totalLiveWins: Math.max(0, num($("#totalLiveWins").value))
       const li = document.createElement("li");
       li.innerHTML = `
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-             stroke="${r.pass ? '#22c55e' : '#fb7185'}"
+             stroke="${r.pass ? '#10b981' : '#ef4444'}"
              stroke-width="2" style="margin-top:2px">
           ${
             r.pass
@@ -807,7 +876,7 @@ totalLiveWins: Math.max(0, num($("#totalLiveWins").value))
       adviceWrap.style.display = "block";
       res.advice.forEach(a => {
         const li = document.createElement("li");
-        li.innerHTML = `<div class="help" style="font-size:14px;">${a}</div>`;
+        li.innerHTML = `<div class="help" style="font-size:13px;">${a}</div>`;
         adviceList.appendChild(li);
       });
     } else {
@@ -836,22 +905,23 @@ totalLiveWins: Math.max(0, num($("#totalLiveWins").value))
     render();
   });
 
-/* ---------- Accordion toggle ---------- */
-$("#checklistHeader").addEventListener("click", () => {
-  const body = $("#checklistBody");
-  const icon = $("#checklistIcon");
-  const open = body.style.display === "block";
+  /* ---------- Accordion toggle ---------- */
+  $("#checklistHeader").addEventListener("click", () => {
+    const body = $("#checklistBody");
+    const icon = $("#checklistIcon");
+    const open = body.style.display === "block";
 
-  body.style.display = open ? "none" : "block";
-  icon.textContent = open ? "▶" : "▼";
-});
-/* Initialize */
-renderRules();
+    body.style.display = open ? "none" : "block";
+    icon.textContent = open ? "▶" : "▼";
+  });
 
-// Hide live-only field on initial load
-$("#liveOnlyWrap").style.display = $("#firm").value === "live" ? "block" : "none";
+  /* Initialize */
+  renderRules();
 
-render();
+  // Hide live-only field on initial load
+  $("#liveOnlyWrap").style.display = $("#firm").value === "live" ? "block" : "none";
+
+  render();
 }); // DOMContentLoaded
 </script>
 
