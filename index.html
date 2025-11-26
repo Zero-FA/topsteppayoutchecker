@@ -303,7 +303,7 @@
           </div>
 
           <div>
-            <div class="label">Current PnL ($)</div>
+            <div class="label">Current Account Balance ($)</div>
             <input id="currentBalance" class="input" inputmode="decimal" placeholder="e.g., 5431.52" />
             <div class="help">
               Use the actual balance shown in your funded account dashboard.
@@ -540,34 +540,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const v = Number(String(s||"").replace(/[^0-9.-]/g,""));
     return Number.isFinite(v) ? v : 0;
   };
-    /* ---------- Build Trading Rule Checkboxes ---------- */
-  const rulesList = $("#rulesList");
+/* ---------- Build Trading Rule Checkboxes ---------- */
+const rulesList = $("#rulesList");
 
-  function renderRules() {
-    const firm = $("#firm").value;
-    rulesList.innerHTML = "";
-    FIRM_RULES[firm].forEach(rule => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-        <div class="rule-main">
-          <input type="checkbox" id="rule_${rule.key}" data-rule="${rule.key}" />
-          <label for="rule_${rule.key}">${rule.label}</label>
-        </div>
-        <a href="${RULE_LINKS[rule.key]}" target="_blank" class="rule-link">
-          Learn more →
-        </a>
-      `;
-      rulesList.appendChild(li);
-    });
-  }
-
-  // 🔥 FIXED: Auto-update when checking ANY rule box
-  requestAnimationFrame(() => {
-    rulesList.querySelectorAll("input[type='checkbox']").forEach(box => {
-      box.addEventListener("input", render);
-    });
+function renderRules() {
+  const firm = $("#firm").value;
+  rulesList.innerHTML = "";
+  FIRM_RULES[firm].forEach(rule => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <div class="rule-main">
+        <input type="checkbox" id="rule_${rule.key}" data-rule="${rule.key}" />
+        <label for="rule_${rule.key}">${rule.label}</label>
+      </div>
+      <a href="${RULE_LINKS[rule.key]}" target="_blank" class="rule-link">
+        Learn more →
+      </a>
+    `;
+    rulesList.appendChild(li);
   });
+}
 
+// 🔥 FIXED: attach checkbox listeners AFTER rules exist
+function attachRuleEvents() {
+  rulesList.querySelectorAll("input[type='checkbox']").forEach(box => {
+    box.addEventListener("input", render);
+  });
+}
   /* ---------- Evaluation Logic for Express & Live ---------- */
 
   function evaluate(inputs) {
@@ -803,10 +802,13 @@ $("#firm").addEventListener("change", () => {
   // Update payout policy link
   $("#policyLink").href =
     $("#firm").value === "express"
-      ? "https://help.topstep.com/en/articles/8284233-topstep-payout-policy"
-      : "https://help.topstep.com/en/articles/8284215-express-funded-account-parameters";
+      ? "https://help.topstep.com/en/articles/8284215-express-funded-account-parameters"
+      : "https://help.topstep.com/en/articles/8284233-topstep-payout-policy";
 
+  // Rebuild rules + reattach checkbox listeners
   renderRules();
+  attachRuleEvents();
+
   render();
 });
 
@@ -824,7 +826,8 @@ $("#checklistHeader").addEventListener("click", () => {
 
 // Hide Live-only fields on first load
 $("#liveOnlyWrap").style.display =
-  $("#firm").value === "live" ? "block" : "none";
+  ($("#firm").value === "live" ? "block" : "none");
 
 renderRules();
+attachRuleEvents();   // ← REQUIRED on first load
 render();
