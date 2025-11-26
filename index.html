@@ -417,38 +417,40 @@ body {
 
         <hr style="margin-top:12px;margin-bottom:8px;">
 
-        <!-- Trading Rule Compliance -->
-        <div class="row-between" style="margin-bottom:4px;">
-          <div style="font-weight:600;font-size:16px;">Trading Rule Compliance (Required)</div>
-          <div class="tag">
-            <span style="width:7px;height:7px;border-radius:999px;background:var(--good);"></span>
-            Must be TRUE for payout
-          </div>
+      <!-- Trading Rule Compliance -->
+      <div class="row-between" style="margin-bottom:4px;">
+        <div style="font-weight:600;font-size:16px;">Trading Rule Compliance (Required)</div>
+        <div class="tag">
+          <span style="width:7px;height:7px;border-radius:999px;background:var(--good);"></span>
+          Must be TRUE for payout
         </div>
-        <div style="font-size:14px;color:var(--muted);margin-bottom:6px;">
-          Confirm you did <b>not</b> violate any Topstep rules during this payout period. If you did, contact Support before requesting.
+      </div>
+      <div style="font-size:14px;color:var(--muted);margin-bottom:6px;">
+        Confirm you did <b>not</b> violate any Topstep rules during this payout period. If you did, contact Support before requesting.
+      </div>
+      <ul id="rulesList" class="list rules-grid"></ul>
+    </div> <!-- ✅ closes the FIRST .card -->
+
+    <!-- Eligibility Checklist -->
+    <div class="card">
+      <div id="checklistHeader" class="accordion-header">
+        <div class="accordion-title">Eligibility Checklist</div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span class="help" style="margin-top:0;font-size:10px;">Click to expand</span>
+          <span id="checklistIcon" class="accordion-icon">▶</span>
         </div>
-        <ul id="rulesList" class="list rules-grid"></ul>
       </div>
 
-<!-- Eligibility Checklist -->
-<div class="card">
-  <div id="checklistHeader" class="accordion-header">
-    <div class="accordion-title">Eligibility Checklist</div>
-    <div style="display:flex;align-items:center;gap:6px;">
-      <span class="help" style="margin-top:0;font-size:10px;">Click to expand</span>
-      <span id="checklistIcon" class="accordion-icon">▶</span>
-    </div>
-  </div>
-  <div class="help" style="margin-top:4px;margin-bottom:2px;">
-    Updates automatically based on your numbers and rule confirmations.
-  </div>
+      <div class="help" style="margin-top:4px;margin-bottom:2px;">
+        Updates automatically based on your numbers and rule confirmations.
+      </div>
 
-  <!-- FIX APPLIED HERE ↓↓↓ -->
-  <div id="checklistBody" class="accordion-body" style="display:none;">
-    <ul id="checklist" class="list" style="margin-top:4px;"></ul>
-  </div>
-</div>
+      <div id="checklistBody" class="accordion-body" style="display:none;">
+        <ul id="checklist" class="list" style="margin-top:4px;"></ul>
+      </div>
+    </div> 
+
+</div> 
 
     <!-- RIGHT COLUMN -->
     <div class="grid" style="gap:12px;">
