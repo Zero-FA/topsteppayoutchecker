@@ -562,8 +562,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 🔥 FIXED: Auto-update when checking ANY rule box
-  rulesList.querySelectorAll("input[type='checkbox']").forEach(box => {
-    box.addEventListener("input", render);
+  requestAnimationFrame(() => {
+    rulesList.querySelectorAll("input[type='checkbox']").forEach(box => {
+      box.addEventListener("input", render);
+    });
   });
 }
 
